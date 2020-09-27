@@ -1,10 +1,12 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
+import React,{ useContext } from 'react';
+import { Table , Button} from 'react-bootstrap';
+import { MyContext } from '../../context'
 
-const CarList = (props) => {
+const CarList = () => {
+    const context = useContext(MyContext);
 
     const renderlist = () =>( 
-        props.cars.map((item,i) =>(
+        context.cars.map((item,i) =>(
             <tr key={i}>
                 <td>{item.brand}</td>
                 <td>{item.model}</td>
@@ -15,18 +17,28 @@ const CarList = (props) => {
 
   return (
     <div>
-        <Table striped bordered hover>
-        <thead>
-            <tr>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-           {renderlist()}
-        </tbody>
-        </Table>
+        { context.toggleView ?
+            <Table striped bordered hover>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+            {renderlist()}
+            </tbody>
+            </Table>
+        :null}
+        <Button
+            onClick={ ()=> {
+               context.triggerToggle();
+            }}
+        >
+            Toggle it
+        </Button>
+        
     </div>
   );
 }

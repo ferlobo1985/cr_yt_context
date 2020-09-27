@@ -4,20 +4,21 @@ import { Container } from 'react-bootstrap';
 
 import Header from './components/header';
 import Home from './components/home';
-import Cars from './components/cars'
+import Cars from './components/cars';
+import { MyProvider } from './context';
 
-const Routes = ({cars}) =>(
+const Routes = () =>(
     <>
     <BrowserRouter>
+        <MyProvider>
             <Header/>
             <Container className="mt-3">
                 <Switch>
-                    <Route path="/cars" render={(props) => 
-                        <Cars {...props} cars={cars}/>
-                    } />
+                    <Route path="/cars" component={Cars}/>
                     <Route path="/" component={Home} />
                 </Switch>
             </Container>
+        </MyProvider>
     </BrowserRouter>
     </>
 )
