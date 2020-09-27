@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-const MyContext = React.createContext();
+const CarsContext = React.createContext();
+const UsersContext = React.createContext();
 
 class MyProvider extends Component {
 
@@ -22,15 +23,17 @@ class MyProvider extends Component {
 
     render(){
         return(
-            <MyContext.Provider value={{
+            <CarsContext.Provider value={{
                 cars: this.state.cars,
                 toggleView: this.state.toggleView,
                 triggerToggle: this.toggleViewHandler
             }}>
-                {this.props.children}
-            </MyContext.Provider>
+                <UsersContext.Provider value={'Steve'}>
+                    {this.props.children}
+                </UsersContext.Provider>
+            </CarsContext.Provider>
         )
     }
 }
 
-export { MyContext,MyProvider }
+export { CarsContext,UsersContext,MyProvider }

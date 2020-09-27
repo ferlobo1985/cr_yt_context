@@ -1,12 +1,13 @@
 import React,{ useContext } from 'react';
 import { Table , Button} from 'react-bootstrap';
-import { MyContext } from '../../context'
+import { CarsContext,UsersContext } from '../../context'
 
 const CarList = () => {
-    const context = useContext(MyContext);
+    const carsContext = useContext(CarsContext);
+    const userContext = useContext(UsersContext);
 
     const renderlist = () =>( 
-        context.cars.map((item,i) =>(
+        carsContext.cars.map((item,i) =>(
             <tr key={i}>
                 <td>{item.brand}</td>
                 <td>{item.model}</td>
@@ -17,7 +18,7 @@ const CarList = () => {
 
   return (
     <div>
-        { context.toggleView ?
+        { carsContext.toggleView ?
             <Table striped bordered hover>
             <thead>
                 <tr>
@@ -33,11 +34,15 @@ const CarList = () => {
         :null}
         <Button
             onClick={ ()=> {
-               context.triggerToggle();
+                carsContext.triggerToggle();
             }}
         >
             Toggle it
         </Button>
+        <hr/>
+        <div>
+            The user is {userContext}
+        </div>
         
     </div>
   );

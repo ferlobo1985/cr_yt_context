@@ -1,22 +1,28 @@
 import React,{Component} from 'react';
 import CarList from './carList';
-import { MyContext } from '../../context'
+import { CarsContext, UsersContext } from '../../context'
 
 class Cars extends Component {
-    static contextType = MyContext;
-
+    static contextType = CarsContext;
 
     render(){
        // console.log(this.context)
         return(
             <>
-                <MyContext.Consumer>
+                <CarsContext.Consumer>
                     {
                         context => {
-                            console.log(context)
+                            console.log(context);
+                            return (
+                                <UsersContext.Consumer>
+                                    {  user => {
+                                        console.log(user)
+                                    }}
+                                </UsersContext.Consumer>
+                            )
                         }
                     }
-                </MyContext.Consumer>
+                </CarsContext.Consumer>
 
 
                 <CarList/>
